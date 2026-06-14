@@ -1,0 +1,14 @@
+{
+  "name": "nibad-2027-landing-page",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./style.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./style.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "lucide-static": "^0.468.0",
+    "tailwindcss": "^4.1.17"
+  }
+}
