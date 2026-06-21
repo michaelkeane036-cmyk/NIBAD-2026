@@ -241,60 +241,59 @@
       </div>
     </section>
 
-    <section class="section" id="gallery">
+    <section class="section gallery-section" id="gallery">
       <div class="section-shell">
         <div class="mb-10 flex items-end justify-between gap-8 max-[760px]:block reveal">
           <div>
             <p class="eyebrow eyebrow-dark">Gallery / Media</p>
             <h2 class="premium-heading text-balance">Moments made for the spotlight.</h2>
           </div>
-          <p class="max-w-md leading-7 text-ink-950/62" data-gallery-status>Viewing NIBAD 2024 memories.</p>
+          <p class="max-w-md leading-7 text-ink-950/62" data-gallery-status>Choose a year to open the NIBAD photo archive.</p>
         </div>
-        <div class="mb-8 grid grid-cols-4 gap-4 max-[1000px]:grid-cols-2 max-[620px]:grid-cols-1 reveal" aria-label="Featured NIBAD media">
-          <figure class="gallery-card group">
+        <div class="featured-media-grid reveal" aria-label="Featured NIBAD media">
+          <figure class="featured-media-card group">
             <img src="assets/event-banner.png" alt="AI generated NIBAD gala stage concept" loading="lazy">
             <span class="image-overlay"></span>
-            <figcaption class="gallery-caption">Gala Stage</figcaption>
+            <figcaption class="featured-media-caption">Gala Stage</figcaption>
           </figure>
-          <figure class="gallery-card group">
+          <figure class="featured-media-card group">
             <img src="assets/gala-arrival.png" alt="AI generated NIBAD guest arrival concept" loading="lazy">
             <span class="image-overlay"></span>
-            <figcaption class="gallery-caption">Guest Arrivals</figcaption>
+            <figcaption class="featured-media-caption">Guest Arrivals</figcaption>
           </figure>
-          <figure class="gallery-card group">
-            <img src="assets/media-collage.png" alt="AI generated NIBAD media collage concept" loading="lazy">
+          <figure class="featured-media-card group">
+            <img src="assets/media-interview.png" alt="AI generated NIBAD media interview concept" loading="lazy">
             <span class="image-overlay"></span>
-            <figcaption class="gallery-caption">Media Moments</figcaption>
+            <figcaption class="featured-media-caption">Media Moments</figcaption>
           </figure>
-          <figure class="gallery-card group">
+          <figure class="featured-media-card group">
             <img src="assets/nominee-triptych.png" alt="AI generated NIBAD nominee spotlight concept" loading="lazy">
             <span class="image-overlay"></span>
-            <figcaption class="gallery-caption">Nominee Spotlight</figcaption>
+            <figcaption class="featured-media-caption">Nominee Spotlight</figcaption>
           </figure>
         </div>
-        <div class="gallery-years reveal" role="tablist" aria-label="NIBAD gallery years" data-gallery-tabs>
-          <button class="gallery-year-btn" type="button" role="tab" aria-selected="false" data-gallery-year="2021">
+        <div class="gallery-years reveal" aria-label="NIBAD gallery years" data-gallery-tabs>
+          <button class="gallery-year-btn" type="button" aria-pressed="false" data-gallery-year="2021">
             <span class="icon" style="--icon: url('assets/icons/camera.svg')"></span>
             <span>NIBAD 2021</span>
             <small>23 photos</small>
           </button>
-          <button class="gallery-year-btn" type="button" role="tab" aria-selected="false" data-gallery-year="2022">
+          <button class="gallery-year-btn" type="button" aria-pressed="false" data-gallery-year="2022">
             <span class="icon" style="--icon: url('assets/icons/camera.svg')"></span>
             <span>NIBAD 2022</span>
             <small>23 photos</small>
           </button>
-          <button class="gallery-year-btn" type="button" role="tab" aria-selected="false" data-gallery-year="2023">
+          <button class="gallery-year-btn" type="button" aria-pressed="false" data-gallery-year="2023">
             <span class="icon" style="--icon: url('assets/icons/camera.svg')"></span>
             <span>NIBAD 2023</span>
             <small>10 photos</small>
           </button>
-          <button class="gallery-year-btn" type="button" role="tab" aria-selected="true" data-gallery-year="2024">
+          <button class="gallery-year-btn" type="button" aria-pressed="false" data-gallery-year="2024">
             <span class="icon" style="--icon: url('assets/icons/camera.svg')"></span>
             <span>NIBAD 2024</span>
             <small>6 photos</small>
           </button>
         </div>
-        <div class="gallery-grid" data-gallery-grid aria-live="polite"></div>
       </div>
       <div class="gallery-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="NIBAD photo viewer" data-gallery-lightbox hidden>
         <button class="gallery-lightbox-close" type="button" aria-label="Close gallery viewer" data-gallery-close>
@@ -316,7 +315,7 @@
       </div>
     </section>
 
-    <section class="section" id="faq">
+    <section class="section faq-section" id="faq">
       <div class="section-shell grid grid-cols-[.86fr_1.14fr] items-start gap-10 max-[1000px]:grid-cols-1">
         <div class="sticky top-28 min-h-[560px] overflow-hidden rounded-[2rem] shadow-lux max-[1000px]:relative max-[1000px]:top-auto reveal">
           <img class="h-[560px] w-full object-cover" src="assets/gala-arrival.png" alt="NIBAD gala assistance desk">

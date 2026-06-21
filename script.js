@@ -141,7 +141,6 @@ const galleryAlbums = [
   },
 ];
 
-const galleryGrid = document.querySelector("[data-gallery-grid]");
 const galleryTabs = document.querySelector("[data-gallery-tabs]");
 const galleryStatus = document.querySelector("[data-gallery-status]");
 const galleryLightbox = document.querySelector("[data-gallery-lightbox]");
@@ -164,57 +163,27 @@ const getGalleryPhoto = (album, index) => {
   return { alt, number, src };
 };
 
-const setActiveGalleryTab = (year) => {
+const setActiveGalleryButton = (year) => {
   galleryTabs?.querySelectorAll("[data-gallery-year]").forEach((button) => {
     const isActive = button.getAttribute("data-gallery-year") === year;
     button.classList.toggle("is-active", isActive);
-    button.setAttribute("aria-selected", String(isActive));
-    button.setAttribute("tabindex", isActive ? "0" : "-1");
+    button.setAttribute("aria-pressed", String(isActive));
   });
 };
 
 const updateGalleryStatus = () => {
   if (!galleryStatus || !activeGalleryAlbum) return;
   const count = activeGalleryAlbum.photos.length;
-  galleryStatus.textContent = `Viewing NIBAD ${activeGalleryAlbum.year} memories with ${count} ${count === 1 ? "photo" : "photos"}.`;
+  galleryStatus.textContent = `Opened NIBAD ${activeGalleryAlbum.year} archive with ${count} ${count === 1 ? "photo" : "photos"}.`;
 };
 
-const renderGalleryAlbum = (year = "2024") => {
-  if (!galleryGrid) return;
+const openGalleryAlbum = (year = "2024") => {
   const album = galleryAlbums.find((item) => item.year === year) || activeGalleryAlbum;
   activeGalleryAlbum = album;
-  galleryGrid.innerHTML = "";
-
-  album.photos.forEach((_, index) => {
-    const photo = getGalleryPhoto(album, index);
-    const figure = document.createElement("figure");
-    const button = document.createElement("button");
-    const image = document.createElement("img");
-    const overlay = document.createElement("span");
-    const caption = document.createElement("figcaption");
-
-    figure.className = "gallery-card group";
-    button.className = "gallery-photo-btn";
-    button.type = "button";
-    button.setAttribute("aria-label", `Open ${photo.alt}`);
-    image.src = photo.src;
-    image.alt = photo.alt;
-    image.loading = "lazy";
-    overlay.className = "image-overlay";
-    caption.className = "gallery-caption";
-    caption.textContent = `Photo ${photo.number}`;
-
-    button.append(image, overlay, caption);
-    figure.append(button);
-    galleryGrid.append(figure);
-
-    button.addEventListener("click", () => {
-      openGalleryLightbox(index);
-    });
-  });
-
-  setActiveGalleryTab(album.year);
+  activeGalleryIndex = 0;
+  setActiveGalleryButton(album.year);
   updateGalleryStatus();
+  openGalleryLightbox(0);
 };
 
 const updateGalleryLightbox = () => {
@@ -272,7 +241,7 @@ const moveGalleryLightbox = (direction) => {
 galleryTabs?.addEventListener("click", (event) => {
   const button = event.target instanceof Element ? event.target.closest("[data-gallery-year]") : null;
   if (!(button instanceof HTMLButtonElement)) return;
-  renderGalleryAlbum(button.getAttribute("data-gallery-year") || "2024");
+  openGalleryAlbum(button.getAttribute("data-gallery-year") || "2024");
 });
 
 galleryClose?.addEventListener("click", closeGalleryLightbox);
@@ -303,8 +272,6 @@ document.addEventListener("keydown", (event) => {
     moveGalleryLightbox(1);
   }
 });
-
-renderGalleryAlbum("2024");
 
 if (prefersReducedMotion) {
   document.querySelectorAll(".reveal").forEach((element) => {

@@ -83,6 +83,14 @@
     @apply relative py-20 md:py-28;
   }
 
+  .gallery-section {
+    @apply pb-12;
+  }
+
+  .faq-section {
+    @apply pt-12;
+  }
+
   .eyebrow {
     @apply mb-4 text-xs font-black uppercase text-gold-300;
     letter-spacing: 0.12em;
@@ -284,27 +292,23 @@
     @apply text-forest-950/70;
   }
 
-  .gallery-grid {
-    @apply grid grid-cols-3 gap-4;
+  .featured-media-grid {
+    @apply mb-8 grid grid-cols-4 gap-4;
   }
 
-  .gallery-card {
-    @apply relative min-h-[310px] overflow-hidden rounded-[1.75rem] border border-gold-400/30 bg-forest-950 shadow-lux transition duration-300;
+  .featured-media-card {
+    @apply relative min-h-[280px] overflow-hidden rounded-[1.55rem] border border-gold-400/30 bg-forest-950 shadow-lux transition duration-300;
   }
 
-  .gallery-card:hover {
+  .featured-media-card:hover {
     @apply -translate-y-1 border-gold-400/55 shadow-gold;
   }
 
-  .gallery-photo-btn {
-    @apply relative block size-full cursor-pointer overflow-hidden text-left;
+  .featured-media-card img {
+    @apply h-[280px] w-full object-cover transition duration-700 group-hover:scale-105;
   }
 
-  .gallery-card img {
-    @apply h-[310px] w-full object-cover transition duration-700 group-hover:scale-105;
-  }
-
-  .gallery-caption {
+  .featured-media-caption {
     @apply absolute bottom-5 left-5 z-10 rounded-full border border-gold-300/40 bg-forest-950/60 px-4 py-2 text-sm font-black text-white shadow-2xl backdrop-blur-md;
   }
 
@@ -459,11 +463,19 @@
 }
 
 @media (max-width: 1000px) {
-  .gallery-years {
+  .featured-media-grid {
     @apply grid-cols-2;
   }
 
-  .gallery-grid {
+  .featured-media-card {
+    @apply min-h-[240px];
+  }
+
+  .featured-media-card img {
+    @apply h-[240px];
+  }
+
+  .gallery-years {
     @apply grid-cols-2;
   }
 }
@@ -471,6 +483,14 @@
 @media (max-width: 680px) {
   .section {
     @apply py-14;
+  }
+
+  .gallery-section {
+    @apply pb-6;
+  }
+
+  .faq-section {
+    @apply pt-6;
   }
 
   .section-shell {
@@ -490,27 +510,27 @@
   }
 
   .gallery-years {
-    @apply gap-2 rounded-[1.1rem] p-1.5;
+    @apply mb-0 gap-2 rounded-[1.1rem] p-1.5;
   }
 
   .gallery-year-btn {
     @apply min-h-14 flex-col gap-1 px-2 text-xs;
   }
 
-  .gallery-grid {
-    @apply gap-3;
+  .featured-media-grid {
+    @apply mb-6 gap-3;
   }
 
-  .gallery-card {
-    @apply min-h-[220px] rounded-[1.35rem];
+  .featured-media-card {
+    @apply min-h-[150px] rounded-[1rem];
   }
 
-  .gallery-card img {
-    @apply h-[220px];
+  .featured-media-card img {
+    @apply h-[150px];
   }
 
-  .gallery-caption {
-    @apply bottom-3 left-3 max-w-[calc(100%-1.5rem)] px-3 py-1.5 text-[0.72rem];
+  .featured-media-caption {
+    @apply bottom-2 left-2 max-w-[calc(100%-1rem)] px-2.5 py-1 text-[0.66rem];
   }
 
   .gallery-lightbox {
@@ -547,12 +567,6 @@
 
   .gallery-lightbox-next {
     @apply right-4;
-  }
-}
-
-@media (max-width: 620px) {
-  .gallery-grid {
-    @apply grid-cols-1;
   }
 }
 
