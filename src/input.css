@@ -259,16 +259,24 @@
     @apply border-gold-300/60 bg-[radial-gradient(circle_at_20%_0%,rgba(231,191,104,.28),transparent_18rem),linear-gradient(145deg,#061f15,#0a5b39)] text-white;
   }
 
-  .nominee-card {
-    @apply relative min-h-[520px] overflow-hidden rounded-[1.75rem] border border-gold-400/30 bg-forest-950 shadow-lux;
+  .winner-grid {
+    @apply grid grid-cols-[1.08fr_.72fr_1.08fr] items-start gap-5;
   }
 
-  .nominee-card img {
-    @apply h-[520px] w-full object-cover transition duration-700 group-hover:scale-105;
+  .winner-card {
+    @apply overflow-hidden rounded-[1.25rem] border border-gold-400/30 bg-white shadow-lux;
+  }
+
+  .winner-card img {
+    @apply block h-auto w-full transition duration-700 group-hover:scale-[1.02];
+  }
+
+  .winner-caption {
+    @apply border-t border-gold-400/20 bg-white px-5 py-4 text-center text-sm font-black text-forest-950;
   }
 
   .gallery-years {
-    @apply mb-8 grid grid-cols-4 gap-3 rounded-[1.45rem] border border-gold-400/25 bg-white/70 p-2 shadow-lux backdrop-blur-xl;
+    @apply mb-8 grid grid-cols-5 gap-3 rounded-[1.45rem] border border-gold-400/25 bg-white/70 p-2 shadow-lux backdrop-blur-xl;
   }
 
   .gallery-year-btn {
@@ -463,6 +471,19 @@
 }
 
 @media (max-width: 1000px) {
+  .winner-grid {
+    @apply grid-cols-1;
+  }
+
+  .winner-card {
+    width: min(100%, 760px);
+    margin-inline: auto;
+  }
+
+  .winner-card-portrait {
+    width: min(100%, 520px);
+  }
+
   .featured-media-grid {
     @apply grid-cols-2;
   }
@@ -477,6 +498,10 @@
 
   .gallery-years {
     @apply grid-cols-2;
+  }
+
+  .gallery-year-btn:last-child {
+    @apply col-span-2;
   }
 }
 

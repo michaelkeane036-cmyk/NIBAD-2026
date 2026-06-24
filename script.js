@@ -139,6 +139,26 @@ const galleryAlbums = [
       "bbbe4d10-dd48-428a-8bb8-88e111026905.jpg",
     ],
   },
+  {
+    year: "2025",
+    folder: "NIBAD 2025",
+    photos: [
+      "0cdefe80-1c22-4360-b368-da2e4c5e3d7e.jpg",
+      "1a97f330-88a3-4a25-930e-4e5679ac8121.jpg",
+      "8c487287-34af-482c-ade7-d829a5b2b977.jpg",
+      "8d403ecd-729f-4137-952d-c43d274aff56.jpg",
+      "25a940e7-6315-4a39-8478-9bfb07a0aba0.jpg",
+      "58c68512-231a-41de-8f2d-3fcf34de247f.jpg",
+      "21005da7-e25b-4ad6-8636-f526cae818da.jpg",
+      "8553136e-fc5d-4a4b-865a-64d51916fa02.jpg",
+      "720adc7a-c68a-4e20-bec8-d1a922916496.jpg",
+      "62089981-653d-4700-b266-d3f03bb3af73.jpg",
+      "c92c7200-f8dc-437e-be3c-1e1ad4c1572e.jpg",
+      "e3862534-5811-4459-a578-75fc9bbcfd47.jpg",
+      "eba37ac7-2fcb-4f36-9944-96018c907454.jpg",
+      "fd3dccef-23c0-41be-aefa-59370aa4eb3b.jpg",
+    ],
+  },
 ];
 
 const galleryTabs = document.querySelector("[data-gallery-tabs]");
@@ -151,7 +171,7 @@ const galleryClose = document.querySelector("[data-gallery-close]");
 const galleryPrev = document.querySelector("[data-gallery-prev]");
 const galleryNext = document.querySelector("[data-gallery-next]");
 
-let activeGalleryAlbum = galleryAlbums.find((album) => album.year === "2024") || galleryAlbums[0];
+let activeGalleryAlbum = galleryAlbums.find((album) => album.year === "2025") || galleryAlbums[0];
 let activeGalleryIndex = 0;
 let galleryLastFocus = null;
 let galleryCloseTimer = null;
@@ -177,7 +197,7 @@ const updateGalleryStatus = () => {
   galleryStatus.textContent = `Opened NIBAD ${activeGalleryAlbum.year} archive with ${count} ${count === 1 ? "photo" : "photos"}.`;
 };
 
-const openGalleryAlbum = (year = "2024") => {
+const openGalleryAlbum = (year = "2025") => {
   const album = galleryAlbums.find((item) => item.year === year) || activeGalleryAlbum;
   activeGalleryAlbum = album;
   activeGalleryIndex = 0;
@@ -241,7 +261,7 @@ const moveGalleryLightbox = (direction) => {
 galleryTabs?.addEventListener("click", (event) => {
   const button = event.target instanceof Element ? event.target.closest("[data-gallery-year]") : null;
   if (!(button instanceof HTMLButtonElement)) return;
-  openGalleryAlbum(button.getAttribute("data-gallery-year") || "2024");
+  openGalleryAlbum(button.getAttribute("data-gallery-year") || "2025");
 });
 
 galleryClose?.addEventListener("click", closeGalleryLightbox);
