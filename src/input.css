@@ -276,7 +276,7 @@
   }
 
   .gallery-years {
-    @apply mb-8 grid grid-cols-5 gap-3 rounded-[1.45rem] border border-gold-400/25 bg-white/70 p-2 shadow-lux backdrop-blur-xl;
+    @apply grid grid-cols-5 gap-3 rounded-[1.45rem] border border-gold-400/25 bg-white/70 p-2 shadow-lux backdrop-blur-xl;
   }
 
   .gallery-year-btn {
@@ -298,6 +298,14 @@
 
   .gallery-year-btn.is-active small {
     @apply text-forest-950/70;
+  }
+
+  .gallery-instruction {
+    @apply mx-auto mt-4 flex max-w-2xl items-center justify-center gap-2.5 text-center text-sm font-bold leading-6 text-ink-950/62;
+  }
+
+  .gallery-instruction-icon {
+    @apply grid size-8 shrink-0 place-items-center rounded-full bg-gold-300 text-forest-950 shadow-gold;
   }
 
   .featured-media-grid {
@@ -531,11 +539,19 @@
   }
 
   .gallery-years {
-    @apply mb-0 gap-2 rounded-[1.1rem] p-1.5;
+    @apply gap-2 rounded-[1.1rem] p-1.5;
   }
 
   .gallery-year-btn {
     @apply min-h-14 flex-col gap-1 px-2 text-xs;
+  }
+
+  .gallery-instruction {
+    @apply mt-3 items-start text-xs leading-5;
+  }
+
+  .gallery-instruction-icon {
+    @apply size-7;
   }
 
   .featured-media-grid {

@@ -240,12 +240,11 @@
 
     <section class="section gallery-section" id="gallery">
       <div class="section-shell">
-        <div class="mb-10 flex items-end justify-between gap-8 max-[760px]:block reveal">
+        <div class="mb-10 reveal">
           <div>
             <p class="eyebrow eyebrow-dark">Gallery / Media</p>
             <h2 class="premium-heading text-balance">Moments made for the spotlight.</h2>
           </div>
-          <p class="max-w-md leading-7 text-ink-950/62" data-gallery-status>Choose a year to open the NIBAD photo archive.</p>
         </div>
         <div class="featured-media-grid reveal" aria-label="Featured NIBAD media">
           <figure class="featured-media-card group">
@@ -295,6 +294,12 @@
             <span>NIBAD 2025</span>
             <small>14 photos</small>
           </button>
+        </div>
+        <div class="gallery-instruction reveal">
+          <span class="gallery-instruction-icon" aria-hidden="true">
+            <span class="icon" style="--icon: url('assets/icons/camera.svg')"></span>
+          </span>
+          <p data-gallery-status aria-live="polite">Tap or click a year above to open its photo gallery. Use the arrows to browse the pictures.</p>
         </div>
       </div>
       <div class="gallery-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="NIBAD photo viewer" data-gallery-lightbox hidden>
