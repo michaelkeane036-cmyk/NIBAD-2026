@@ -260,7 +260,7 @@
   }
 
   .winner-grid {
-    @apply grid grid-cols-[1.08fr_.72fr_1.08fr] items-start gap-5;
+    @apply grid grid-cols-3 items-start gap-5;
   }
 
   .winner-card {
@@ -478,10 +478,6 @@
   .winner-card {
     width: min(100%, 760px);
     margin-inline: auto;
-  }
-
-  .winner-card-portrait {
-    width: min(100%, 520px);
   }
 
   .featured-media-grid {
