@@ -121,21 +121,26 @@
     @apply inline-flex min-w-0 items-center gap-3;
   }
 
-  .brand-mark {
-    @apply grid size-11 shrink-0 place-items-center rounded-full border border-white/70 bg-gradient-to-br from-white to-gold-400 font-serif text-xl font-black text-forest-950 shadow-gold;
+  .brand-logo {
+    @apply block h-14 w-auto max-w-28 object-contain drop-shadow-2xl transition duration-300;
   }
 
-  .brand strong,
-  .brand small {
-    @apply block leading-none;
+  .brand:hover .brand-logo,
+  .brand:focus-visible .brand-logo {
+    @apply -translate-y-0.5 brightness-110;
   }
 
-  .brand strong {
-    @apply font-black;
+  .footer-brand {
+    @apply w-fit;
   }
 
-  .brand small {
-    @apply mt-1 text-[0.72rem] text-white/70;
+  .footer-brand-logo {
+    @apply block h-auto w-[min(18rem,100%)] object-contain drop-shadow-2xl transition duration-300;
+  }
+
+  .footer-brand:hover .footer-brand-logo,
+  .footer-brand:focus-visible .footer-brand-logo {
+    @apply -translate-y-0.5 brightness-110;
   }
 
   .site-nav {
@@ -530,8 +535,8 @@
     @apply top-3 w-[calc(100%-1.5rem)] rounded-[1.55rem];
   }
 
-  .brand small {
-    @apply hidden;
+  .brand-logo {
+    @apply h-[3.25rem] max-w-24;
   }
 
   .btn {
