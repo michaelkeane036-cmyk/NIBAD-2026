@@ -28,6 +28,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
   }
 
   body {
@@ -61,7 +62,12 @@
   h2,
   h3,
   p {
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+  }
+
+  :where(a, button, summary, input):focus-visible {
+    outline: 3px solid #f5db91;
+    outline-offset: 4px;
   }
 
   details > summary {
@@ -81,6 +87,14 @@
 
   .section {
     @apply relative py-20 md:py-28;
+  }
+
+  .skip-link {
+    @apply fixed left-4 top-4 z-[100] -translate-y-20 rounded-full bg-gold-300 px-4 py-2 text-sm font-black text-forest-950 shadow-2xl transition duration-200;
+  }
+
+  .skip-link:focus-visible {
+    @apply translate-y-0;
   }
 
   .gallery-section {
@@ -109,7 +123,7 @@
   }
 
   .site-header {
-    @apply fixed left-1/2 top-4 z-50 grid min-h-[70px] -translate-x-1/2 grid-cols-[auto_1fr_auto] items-center gap-7 rounded-full border border-gold-400/25 bg-forest-950/60 px-4 py-3 text-white shadow-2xl backdrop-blur-xl transition-all duration-300;
+    @apply fixed left-1/2 top-4 z-50 grid min-h-[70px] -translate-x-1/2 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-5 rounded-full border border-gold-400/25 bg-forest-950/60 px-4 py-3 text-white shadow-2xl backdrop-blur-xl transition-all duration-300;
     width: min(1180px, calc(100% - 2.5rem));
   }
 
@@ -143,17 +157,46 @@
     @apply -translate-y-0.5 brightness-110;
   }
 
+  .footer-contact-link {
+    @apply flex min-w-0 items-start gap-2 text-white/70 transition-colors duration-200 hover:text-gold-300 focus-visible:text-gold-300;
+  }
+
+  .footer-contact-link .icon {
+    @apply mt-1;
+  }
+
+  .footer-contact-link span:last-child {
+    @apply min-w-0 break-words;
+  }
+
+  .footer-note {
+    @apply max-w-xs leading-7 text-white/68;
+  }
+
+  .footer-mini-cta {
+    @apply inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-full border border-gold-300/40 px-4 text-sm font-black text-white transition duration-300 hover:border-gold-300 hover:bg-gold-300 hover:text-forest-950 focus-visible:border-gold-300 focus-visible:bg-gold-300 focus-visible:text-forest-950;
+  }
+
   .site-nav {
-    @apply flex justify-center gap-6 text-sm font-bold text-white/75;
+    @apply flex min-w-0 justify-center gap-5 text-sm font-bold text-white/75;
   }
 
   .site-nav a {
-    @apply transition-colors duration-200 hover:text-gold-300 focus-visible:text-gold-300;
+    @apply whitespace-nowrap transition-colors duration-200 hover:text-gold-300 focus-visible:text-gold-300;
   }
 
   .header-cta,
   .btn {
-    @apply relative inline-flex min-h-12 items-center justify-center gap-2 overflow-hidden rounded-full border border-gold-400 px-5 text-sm font-black transition duration-300;
+    @apply relative inline-flex min-h-12 max-w-full items-center justify-center gap-2 overflow-hidden rounded-full border border-gold-400 px-5 text-center text-sm font-black leading-tight transition duration-300;
+  }
+
+  .header-cta {
+    @apply shrink-0;
+  }
+
+  .header-cta > span:not(.icon),
+  .btn > span:not(.icon) {
+    min-width: 0;
   }
 
   .btn::before,
@@ -224,6 +267,31 @@
 
   .gold-icon {
     @apply grid size-12 place-items-center rounded-full border border-gold-400/45 bg-gradient-to-br from-gold-300/30 to-forest-700/20 text-gold-500 shadow-gold;
+  }
+
+  .award-category-grid {
+    @apply mt-7 grid grid-cols-2 gap-x-8 max-[760px]:grid-cols-1;
+  }
+
+  .award-category-link {
+    @apply flex min-h-16 min-w-0 items-center justify-between gap-4 border-t border-gold-300/25 py-4 font-black leading-snug text-white/85 transition duration-200 hover:border-gold-300 hover:text-gold-300 focus-visible:border-gold-300 focus-visible:text-gold-300;
+  }
+
+  .award-category-link span:first-child {
+    @apply min-w-0;
+  }
+
+  .award-category-link small {
+    @apply mt-1 block text-xs font-bold leading-5 text-white/55;
+  }
+
+  .award-category-link .icon {
+    @apply shrink-0 transition-transform duration-200;
+  }
+
+  .award-category-link:hover .icon,
+  .award-category-link:focus-visible .icon {
+    @apply translate-x-1;
   }
 
   .hero-badge {
@@ -355,11 +423,11 @@
   }
 
   .gallery-lightbox-caption {
-    @apply flex items-center justify-between gap-4 rounded-full border border-gold-300/35 bg-white/10 px-5 py-3 text-sm text-white/78 shadow-2xl backdrop-blur-md;
+    @apply flex min-w-0 items-center justify-between gap-4 rounded-full border border-gold-300/35 bg-white/10 px-5 py-3 text-sm text-white/78 shadow-2xl backdrop-blur-md;
   }
 
   .gallery-lightbox-caption strong {
-    @apply font-black text-white;
+    @apply min-w-0 font-black text-white;
   }
 
   .gallery-lightbox-close,
@@ -399,7 +467,7 @@
   }
 
   .faq-item summary {
-    @apply relative flex min-h-16 cursor-pointer items-center justify-between gap-4 px-6 py-5 font-black text-forest-950;
+    @apply relative flex min-h-16 cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left font-black text-forest-950;
   }
 
   .faq-item p {
@@ -475,7 +543,7 @@
   }
 
   .site-nav.is-open {
-    @apply fixed left-5 right-5 top-[88px] grid gap-0 rounded-3xl border border-gold-400/30 bg-forest-950/95 p-4 text-white shadow-lux backdrop-blur-xl;
+    @apply fixed left-5 right-5 top-[88px] grid gap-0 rounded-[1.25rem] border border-gold-400/30 bg-forest-950/95 p-4 text-white shadow-lux backdrop-blur-xl;
   }
 
   .site-nav.is-open a {
@@ -609,6 +677,14 @@
 
   .gallery-lightbox-next {
     @apply right-4;
+  }
+
+  .site-nav.is-open {
+    @apply left-3 right-3 top-[84px];
+  }
+
+  .footer-mini-cta {
+    @apply w-full;
   }
 }
 

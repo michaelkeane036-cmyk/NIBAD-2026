@@ -4,10 +4,13 @@ const navToggle = document.querySelector("[data-nav-toggle]");
 const menuIcon = navToggle?.querySelector(".menu-icon");
 const closeIcon = navToggle?.querySelector(".close-icon");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const desktopNavQuery = window.matchMedia("(min-width: 1025px)");
 
 const setHeaderState = () => {
   header?.classList.toggle("is-scrolled", window.scrollY > 24);
 };
+
+const isNavOpen = () => nav?.classList.contains("is-open") || false;
 
 const setNavState = (isOpen) => {
   nav?.classList.toggle("is-open", isOpen);
@@ -22,7 +25,7 @@ setHeaderState();
 window.addEventListener("scroll", setHeaderState, { passive: true });
 
 navToggle?.addEventListener("click", () => {
-  setNavState(!nav?.classList.contains("is-open"));
+  setNavState(!isNavOpen());
 });
 
 nav?.addEventListener("click", (event) => {
@@ -31,13 +34,22 @@ nav?.addEventListener("click", (event) => {
   setNavState(false);
 });
 
-document.querySelectorAll(".newsletter").forEach((form) => {
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const input = form.querySelector("input");
-    if (input) input.value = "";
-  });
+document.addEventListener("click", (event) => {
+  if (!isNavOpen()) return;
+  if (event.target instanceof Node && header?.contains(event.target)) return;
+  setNavState(false);
 });
+
+const syncNavForViewport = (event) => {
+  if (event.matches) setNavState(false);
+};
+
+if (typeof desktopNavQuery.addEventListener === "function") {
+  desktopNavQuery.addEventListener("change", syncNavForViewport);
+} else if (typeof desktopNavQuery.addListener === "function") {
+  desktopNavQuery.addListener(syncNavForViewport);
+}
+
 
 const syncFaqIcon = (item) => {
   const isOpen = item.open;
@@ -221,8 +233,9 @@ const openGalleryLightbox = (index) => {
     window.clearTimeout(galleryCloseTimer);
     galleryCloseTimer = null;
   }
-  galleryLastFocus = document.activeElement;
-  activeGalleryIndex = index;
+  setNavState(false);
+  galleryLastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  activeGalleryIndex = Math.min(Math.max(index, 0), activeGalleryAlbum.photos.length - 1);
   galleryLightbox.hidden = false;
   updateGalleryLightbox();
   window.requestAnimationFrame(() => {
@@ -254,8 +267,17 @@ const closeGalleryLightbox = () => {
 const moveGalleryLightbox = (direction) => {
   if (!activeGalleryAlbum) return;
   const total = activeGalleryAlbum.photos.length;
+  if (!total) return;
   activeGalleryIndex = (activeGalleryIndex + direction + total) % total;
   updateGalleryLightbox();
+};
+
+const isGalleryOpen = () => galleryLightbox?.classList.contains("is-open") || false;
+
+const getGalleryFocusableElements = () => {
+  if (!galleryLightbox) return [];
+  return Array.from(galleryLightbox.querySelectorAll("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"))
+    .filter((element) => element instanceof HTMLElement && !element.hasAttribute("disabled") && !element.getAttribute("aria-hidden"));
 };
 
 galleryTabs?.addEventListener("click", (event) => {
@@ -268,6 +290,12 @@ galleryClose?.addEventListener("click", closeGalleryLightbox);
 galleryPrev?.addEventListener("click", () => moveGalleryLightbox(-1));
 galleryNext?.addEventListener("click", () => moveGalleryLightbox(1));
 
+galleryLightboxImage?.addEventListener("error", () => {
+  if (!galleryLightboxCaption || !galleryLightboxCounter) return;
+  galleryLightboxCaption.textContent = "This gallery photo could not be loaded.";
+  galleryLightboxCounter.textContent = activeGalleryAlbum ? `NIBAD ${activeGalleryAlbum.year}` : "Gallery";
+});
+
 galleryLightbox?.addEventListener("click", (event) => {
   if (event.target === galleryLightbox) {
     closeGalleryLightbox();
@@ -275,11 +303,40 @@ galleryLightbox?.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (!galleryLightbox?.classList.contains("is-open")) return;
+  const galleryIsOpen = isGalleryOpen();
 
   if (event.key === "Escape") {
-    event.preventDefault();
-    closeGalleryLightbox();
+    if (galleryIsOpen) {
+      event.preventDefault();
+      closeGalleryLightbox();
+      return;
+    }
+
+    if (isNavOpen()) {
+      event.preventDefault();
+      setNavState(false);
+      navToggle?.focus({ preventScroll: true });
+    }
+
+    return;
+  }
+
+  if (!galleryIsOpen) return;
+
+  if (event.key === "Tab") {
+    const focusableElements = getGalleryFocusableElements();
+    if (!focusableElements.length) return;
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
   }
 
   if (event.key === "ArrowLeft") {
